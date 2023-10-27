@@ -1,24 +1,26 @@
-def existe_soma(s, x):
+def tem_par_com_soma(S, x):
+    S.sort()  # Ordenar o conjunto
+    for i in range(len(S)):
+        complemento = x - S[i]
+        # Pesquisa binária para o complemento
+        baixo, alto = i + 1, len(S) - 1
+        while baixo <= alto:
+            meio = (baixo + alto) // 2
+            if S[meio] == complemento:
+                return True
+            elif S[meio] < complemento:
+                baixo = meio + 1
+            else:
+                alto = meio - 1
+    return False
 
-  # Ordena os elementos em S.
+# Função de teste
+def teste():
+    S = [1, 2, 3, 4]
+    x = 5
+    print(tem_par_com_soma(S, x))  
 
-  s.sort()
+    x = 8
+    print(tem_par_com_soma(S, x))  
 
-  # Percorre os elementos em S, mantendo um ponteiro para o último elemento visitado.
-
-  i = 0
-  j = len(s) - 1
-  while i < j:
-    if s[i] + s[j] == x:
-      return True
-    elif s[i] + s[j] < x:
-      i += 1
-    else:
-      j -= 1
-
-  return False
-  
-s = [1, 2, 3, 4, 5]
-x = 6
-
-print(existe_soma(s, x))
+teste()
